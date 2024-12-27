@@ -1,0 +1,47 @@
+<odoo>
+   <template id="leave_application_template" name="Leave Application Form">
+    <div class="container">
+        <h1>Leave Application</h1>
+        <form action="/leave/submit" method="post">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            
+            <div class="form-group">
+                <label for="id_number">Employee ID</label>
+                <input type="text" id="id_number" name="id_number" required="required" class="form-control"/>
+            </div>
+            
+            <div class="form-group">
+                <label for="leave_type">Leave Type</label>
+                <select id="leave_type" name="leave_type" class="form-control" required="required">
+                    <option value="">Select Leave Type</option>
+                    <t t-foreach="leave_types" t-as="leave_type">
+                        <option t-att-value="leave_type.id"><t t-esc="leave_type.name"/></option>
+                    </t>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="leave_date">From</label>
+                <input type="date" id="leave_date" name="leave_date" required="required" class="form-control"/>
+            </div>
+            
+            <div class="form-group">
+                <label for="leave_date_to">To</label>
+                <input type="date" id="leave_date_to" name="leave_date_to" required="required" class="form-control"/>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</template>
+
+    <template id="leave_application_success" name="Leave Application Success">
+        <t t-call="website.layout">
+            <div class="container">
+                <h1>Leave Application Submitted</h1>
+                <p>Your leave application has been submitted successfully. We will review your request shortly.</p>
+                <a href="/" class="btn btn-primary">Back to Home</a>
+            </div>
+        </t>
+    </template>
+</odoo>

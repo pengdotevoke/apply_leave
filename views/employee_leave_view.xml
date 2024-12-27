@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+        <record id="view_employee_leave_form" model="ir.ui.view">
+            <field name="name">apply.leave.form</field>
+            <field name="model">apply.leave</field>
+            <field name="arch" type="xml">
+                <form string="Apply for Leave">
+                    <sheet>
+                        <group>
+                            <field name="id_number"/>
+                            <field name="employee_id" readonly="1"/>
+                            <field name="leave_date_from"/>
+                            <field name="leave_date_to"/>
+                        </group>
+                        <footer>
+                            <button string="Submit" type="object" class="btn-primary" name="action_submit"/>
+                            <button string="Cancel" type="object" class="btn-secondary" name="action_cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_employee_leave" model="ir.actions.act_window">
+            <field name="name">Apply for Leave</field>
+            <field name="res_model">apply.leave</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <menuitem id="menu_employee_leave" name="Leave Application"
+                  parent="hr.menu_hr_root" action="action_employee_leave"/>
+    </data>
+</odoo>
